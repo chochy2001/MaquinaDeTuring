@@ -1,28 +1,24 @@
 #include <string.h>
 #include <stdlib.h>
 
-int conversionBinario(int *numero){
-    char numeroBinario[1000];
-    int a[1000],i=0,numeroBinarioEntero;
-
-    while(*numero>0){
-        a[i]=*numero%2;
-        *numero /= 2;
-        ++i;
+int conversionBinario(int numero){
+    char numeroBinarioChar[100],numeroBinarioCharFinal[100];
+    int a[100],i,numeroBinarioEntero;
+    for(i=0; numero > 0; i++){
+        a[i]= numero % 2;
+        numero = numero / 2;
     }
 
-    for (int j = i-1; j >=0; --j) {
-        printf("%d",a[j]);
-        strcat(numeroBinario, a[j]);
-        printf("numeroBinario = %s",numeroBinario);
+    for(i=i-1;i>=0;i--){
+        sprintf(numeroBinarioChar, "%d",a[i]);
+        strcat(numeroBinarioCharFinal,numeroBinarioChar);
     }
-
-    printf("numeroBinario = %s",numeroBinario);
-
-    numeroBinarioEntero = atoi(numeroBinario);
-    printf("\n");
-    printf("numeroBinarioEntero = %d",numeroBinarioEntero);
+    numeroBinarioEntero = atoi(numeroBinarioCharFinal);
+    //todo hacer que el numero ingresado se pueda almacenar en un arreglo y
+    // despues sacarlo del mismo para ponerlo en un solo numero para poder hacer la
+    // multiplicación de binarios
     return numeroBinarioEntero;
+
 
     //todo recibir un numero y convertirlo a binario.
 }
