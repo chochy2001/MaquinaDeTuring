@@ -1,7 +1,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-int conversionBinario(int numero){
+int conversionBinario(unsigned int numero){
     char numeroBinarioChar[100],numeroBinarioCharFinal[100];
     int a[100],i,numeroBinarioEntero;
     for(i=0; numero > 0; i++){
