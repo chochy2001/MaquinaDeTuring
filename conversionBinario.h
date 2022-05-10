@@ -1,16 +1,16 @@
 #include <string.h>
 #include <stdlib.h>
 
-int conversionBinario(unsigned int numero){
+int conversionBinario(long numero){
     char numeroBinarioChar[100],numeroBinarioCharFinal[100];
-    int a[100],i,numeroBinarioEntero;
+    long a[100],i,numeroBinarioEntero;
     for(i=0; numero > 0; i++){
         a[i]= numero % 2;
         numero = numero / 2;
     }
 
     for(i=i-1;i>=0;i--){
-        sprintf(numeroBinarioChar, "%d",a[i]);
+        sprintf(numeroBinarioChar, "%ld",a[i]);
         strcat(numeroBinarioCharFinal,numeroBinarioChar);
     }
     numeroBinarioEntero = atoi(numeroBinarioCharFinal);
