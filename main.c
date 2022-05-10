@@ -4,9 +4,11 @@
 #include <stdlib.h>
 #include "conversionBinario.h"
 #include "multiplicacionBinario.h"
+#include "conversionEntero.h"
 
-long arregloBinario[100];
+static long arregloBinario[100];
 long contador = 0;
+long multiplicacionRecursiva( long a, long b);
 
 int main() {
     //todo hacer maquina de turing para verificar que es correcta la entrada.
@@ -15,6 +17,7 @@ int main() {
     bool sesion = true;
     char entrada[20] = "", simbolo[] = "x";
     int arregloEnteros[100];
+    long resultado = 0;
     printf("Este programa realiza una multiplicaci%cn de dos n%cmeros naturales a trav%cs ", 162, 163, 130);
     printf("del algoritmo de Maquina de Turing\n");
     printf("Se debe ingresar la multiplicaci%cn a realizar con el formato \"nxn\", donde \"n\" ser%c un n%cmero ", 162,
@@ -40,10 +43,6 @@ int main() {
             arregloEnteros[contador] = atoi(token);
             arregloBinario[contador] = conversionBinario(atoi(token));
             contador++;
-            //printf("Token %s\n",token);
-            //token = strtok(NULL, simbolo);
-            //printf("Numero = %s\n", token);
-            //int2 = atoi(token);
         }
         for (int i = 0; i < contador/*longitud arreglo*/; i++) {
             printf("Binario [ %ld ] (%ld) = %ld\n", i + 1, arregloEnteros[i], arregloBinario[i]);
@@ -52,6 +51,16 @@ int main() {
 
         // Todo prueba de multiplicación binaria.
         printf("\n%dx%d = %ld",arregloEnteros[0],arregloEnteros[1],multiplicacionBinario(arregloBinario[0],arregloBinario[1]));
+        //todo prueba de conversión de binario a decimal
+        /*
+         * Como la función recibe una cadena hay que
+         * convertir el número long a una cadena de
+         * caracteres usando sprintf()
+         */
+        char numeroBinarioFinal[100];
+        sprintf(numeroBinarioFinal,"%d",multiplicacionBinario(arregloBinario[0],arregloBinario[1]));
+        printf("\nEl resultado de la multiplicacion de %ldx%ld = %s = %ld\n",arregloEnteros[0],arregloEnteros[1],numeroBinarioFinal,conversionEntero(numeroBinarioFinal, strlen(numeroBinarioFinal)));
+
 
         // todo Multiplicarlo
         for (int i = 0; i < contador; ++i) {
@@ -66,8 +75,9 @@ int main() {
             */
         }
 
+        resultado = multiplicacionRecursiva(0,0);
+        printf("Resultado = %ld\n" , resultado);
         sesion = false;
-
         return 0;
     }
 
@@ -108,22 +118,30 @@ int main() {
  * */
 
 int contadorAux = 0;
-/*
-long multiplicacionRecursiva(unsigned long a, unsigned long b){
+
+long multiplicacionRecursiva(long a, long b){
+    printf("contadorAux = %d\n",contadorAux);
     if( contadorAux == 0){
         a = arregloBinario[contadorAux];
-        b = arregloBinario[contadorAux++];
-        a = multiplicacionBinario();
+        printf("a = %ld\n" , a);
+        printf("arreglo en %ld = %ld\n" , contadorAux, a);
+        b = arregloBinario[contadorAux+=1];
+        printf("b = %ld\n" , b);
+        printf("arreglo en %ld = %ld\n" , contadorAux, b);
+        a = multiplicacionBinario(a,b);
+        printf("done0\n");
         multiplicacionRecursiva(a, arregloBinario[contadorAux++]);
+        printf("done\n");
     }
-    else
-    {
-        a = multiplicacionBinario(a, arregloBinario[contadorAux++]);
+    else{
+        a = multiplicacionBinario(a, arregloBinario[contadorAux+=1]);
     }
 
-    if(contadorAux != contador){
-        mul
+    if(contadorAux <= contador){
+        multiplicacionRecursiva(a, arregloBinario[contadorAux+=1]);
+    }
+    else{
+        return a;
     }
 
 }
- */
