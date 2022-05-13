@@ -120,28 +120,32 @@ int main() {
 int contadorAux = 0;
 
 long multiplicacionRecursiva(long a, long b){
-    printf("contadorAux = %d\n",contadorAux);
-    if( contadorAux == 0){
+    //printf("contadorAux = %d\n",contadorAux);
+    if(contadorAux < 2){
         a = arregloBinario[contadorAux];
-        printf("a = %ld\n" , a);
-        printf("arreglo en %ld = %ld\n" , contadorAux, a);
         b = arregloBinario[contadorAux+=1];
-        printf("b = %ld\n" , b);
-        printf("arreglo en %ld = %ld\n" , contadorAux, b);
-        a = multiplicacionBinario(a,b);
-        printf("done0\n");
-        multiplicacionRecursiva(a, arregloBinario[contadorAux++]);
-        printf("done\n");
-    }
-    else{
-        a = multiplicacionBinario(a, arregloBinario[contadorAux+=1]);
-    }
-
-    if(contadorAux <= contador){
+        a = multiplicacionBinario( a, b );
+        // todo imprimir a = contador[Aux-1] x contador[Aux]
         multiplicacionRecursiva(a, arregloBinario[contadorAux+=1]);
     }
-    else{
-        return a;
+    else {
+        if(contadorAux == contador){
+            printf("Valor de a = %ld \n", a);
+            /*
+             * printf("Entra 1 \n");
+            printf("Valor de a = %ld \n", a);
+            a = multiplicacionBinario(a,b);
+            multiplicacionRecursiva(a, arregloBinario[contadorAux-1]);
+            contadorAux+=1;
+             */
+            return a;
+        }
+        else if( contadorAux < contador ){
+            //printf("Valor de a = %ld \n", a);
+            a = multiplicacionBinario(a,b);
+            // todo imprimir a = contador[Aux-1] x contador[Aux]
+            multiplicacionRecursiva(a, arregloBinario[contadorAux+=1]);
+        }
     }
 
 }
