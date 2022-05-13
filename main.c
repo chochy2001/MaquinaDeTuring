@@ -86,12 +86,6 @@ int main() {
         return 0;
     }
 
-
-
-
-
-
-
 long multiplicacionRecursiva(long a, long b){
     //printf("contadorAux = %d\n",contadorAux);
     if(contadorAux < 2){
