@@ -1,4 +1,3 @@
-
 #ifndef PROYECTOLFYA_VALIDACIONENTRADA_H
 #define PROYECTOLFYA_VALIDACIONENTRADA_H
 
@@ -19,6 +18,9 @@ int estado3(const char entrada[]);
 
 int validacionEntrada(const char entrada[], int longitud){
     contChar = 0;
+    for(int i = 0; i < strlen(entrada); i++){
+        printf("i[%d] = %c\n", i,entrada[i]);
+    }
     estado0(entrada);
     /*
     int contadorX = 0,contadorNum = 0;
@@ -49,28 +51,9 @@ int validacionEntrada(const char entrada[], int longitud){
 }
 
 int estado0(const char entrada[]){
-    for (int i = 0; i < strlen(entrada)+1; ++i) {
-        printf("i[%d] = %c\n",i,entrada[i]);
-    }
-
-    bool entero = true;
     if(entrada[contChar] >= '0' && entrada[contChar] <= '9'){
         contChar++;
-        //estado1(entrada);
-        while(entero) {
-            if (entrada[contChar] == 'x') {
-                entero = false;
-                estado1(entrada);
-            }
-            else{
-                if(entrada[contChar] >= '0' && entrada[contChar] <= '9'){
-                    contChar++;
-                }
-                else{
-                    entero = false;
-                }
-            }
-        }
+        estado1(entrada);
     }
     else{
         return -1;
@@ -78,7 +61,24 @@ int estado0(const char entrada[]){
 }
 
 int estado1(const char entrada[]){
-    if(entrada[contChar] == 'x' ){
+    bool entero = true;
+    if(entrada[contChar] >= '0' && entrada[contChar] <= '9') {
+        contChar++;
+        while (entero == true) {
+            if (entrada[contChar] >= '0' && entrada[contChar] <= '9') {
+                contChar++;
+            } else if (entrada[contChar] == 'x') {
+                entero = false;
+                contChar++;
+                estado2(entrada);
+            }
+            else{
+                entero = false;
+                return -1;
+            }
+        }
+    }
+    else if(entrada[contChar] == 'x'){
         contChar++;
         estado2(entrada);
     }
@@ -88,28 +88,46 @@ int estado1(const char entrada[]){
 }
 
 int estado2(const char entrada[]){
-    if(entrada[contChar] == 'x'){
-        return -1;//entrada invalida.
-    }else if(entrada[contChar] >= '0' && entrada[contChar] <= '9'){
+    if(entrada[contChar] >= '0' && entrada[contChar] <= '9'){
         contChar++;
         estado3(entrada);
     }
     else{
         return -1;
     }
-
-
 }
 
 int estado3(const char entrada[]){
-    if(entrada[contChar] == 'x' ){
+    bool entero = true;
+    if(entrada[contChar] >= '0' && entrada[contChar] <= '9'){
+        contChar++;
+        while(entero = true){
+            if(entrada[contChar] >= '0' && entrada[contChar] <= '9'){
+                contChar++;
+            }
+            else if(entrada[contChar] == 'x'){
+                entero = false;
+                contChar++;
+                estado2(entrada);
+            }
+            else if(entrada[contChar] == 00){
+                entero = false;
+                return 0;
+            }
+            else{
+                entero = false;
+                return -1;
+            }
+        }
+    }
+    else if(entrada[contChar] == 'x'){
         contChar++;
         estado2(entrada);
     }
-    else if(entrada[contChar] == 0){
+    else if(entrada[contChar] == 00){
         return 0;
     }
-    else {
+    else{
         return -1;
     }
 }
