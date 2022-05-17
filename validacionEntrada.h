@@ -18,10 +18,13 @@ int estado3(const char entrada[]);
 
 int validacionEntrada(const char entrada[], int longitud){
     contChar = 0;
+    /*
     for(int i = 0; i < strlen(entrada); i++){
         printf("i[%d] = %c\n", i,entrada[i]);
     }
+     */
     estado0(entrada);
+
     /*
     int contadorX = 0,contadorNum = 0;
     if(entrada[0] == 'x' || entrada[longitud-1]== 'x'){
